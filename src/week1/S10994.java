@@ -1,38 +1,42 @@
 package week1;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class S10994 {
 
-    public static String[] addStar(String[] stars) {
-        int height = stars.length;
-        String[] newStars = new String[height + 4];
+    public static Stack<String> addStar(Stack<String> stars, int count) {
+        int height = stars.size();
+        Stack<String> newStars = new Stack<>();
 
-        StringBuilder newString1 = new StringBuilder();
-        StringBuilder newString2 = new StringBuilder();
+        String newString1 = ("*".repeat(height + 4));
+        String newString2 = ("*" + " ".repeat(height + 2) + "*");
 
-        newString1.append("*".repeat(height + 4));
-        newString2.append("*").append(" ".repeat(height + 2)).append("*");
+        newStars.push(newString1);
+        newStars.push(newString2);
 
-        newStars[0] = newString1.toString();
-        newStars[1] = newString2.toString();
-
-        for (int i = 0; i < height; i++) {
-            String newString = "* " + stars[i] + " *";
-            newStars[i + 2] = newString;
+        for (String star : stars) {
+            String newString = "* " + star + " *";
+            newStars.push(newString);
         }
 
-        newStars[height + 2] = newString2.toString();
-        newStars[height + 3] = newString1.toString();
+        newStars.push(newString2);
+        newStars.push(newString1);
 
-        return newStars;
+        if (count - 1 == 0)
+            return newStars;
+
+        return addStar(newStars, count - 1);
     }
 
     public static String[] star(int repeat) {
-        String[] newStars = {"*"};
-        for (int i = 0; i < repeat - 1; i++)
-            newStars = addStar(newStars);
-        return newStars;
+        Stack<String> newStars = new Stack<>();
+        newStars.push("*");
+
+        if (repeat == 1)
+            return newStars.toArray(new String[0]);
+
+        return addStar(newStars, repeat - 1).toArray(new String[0]);
     }
 
     public static void main(String[] args) {
