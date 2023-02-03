@@ -62,8 +62,16 @@ public class S1780 {
 
         int[] results = {0, 0, 0};
 
-        // results 를 통째로 참조시켜 알고리즘 순환 과정에서 자동 증가되도록 한다
-        divide(square, results);
+        if (check(square)) {
+            switch (square[0][0]) {
+                case -1 -> results[0]++;
+                case 0 -> results[1]++;
+                case 1 -> results[2]++;
+            }
+        } else {
+            // results 를 통째로 참조시켜 알고리즘 순환 과정에서 자동 증가되도록 한다
+            divide(square, results);
+        }
 
         // 출력
         System.out.println(results[0]);
