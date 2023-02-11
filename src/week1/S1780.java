@@ -30,8 +30,7 @@ public class S1780 {
 
                 // 원래 사각형에서 작은 사각형 추출
                 for (int k = 0; k < width; k++)
-                    for (int l = 0; l < width; l++)
-                        newSquare[k][l] = square[k + (i * width)][l + (j * width)];
+                    System.arraycopy(square[k + (i * width)], (j * width), newSquare[k], 0, width);
 
                 // 새로운 사각형이 올바른 형태인지 확인한다
                 if (!check(newSquare))
