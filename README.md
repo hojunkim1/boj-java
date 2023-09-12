@@ -1,1 +1,1 @@
-# Algorithm Coding Test
+# Solution of BOJ in Java
